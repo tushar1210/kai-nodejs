@@ -38,10 +38,7 @@ ws.on('message',function(data){
                 break; 
             case 'switchHand':
                 kaiEvents.emit('switchHand',response)
-                break;  
-            case 'incomingData':
-                kaiEvents.emit('incomingData',response) 
-                break;      
+                break;     
             case 'kaiConnected':
                 kaiEvents.emit('kaiConnected',response) 
                 break ;
