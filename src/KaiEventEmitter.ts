@@ -32,6 +32,7 @@ export default class KaiEventEmitter extends EventEmitter {
         this.addListener('error',handler);
     }
     onIncomingData(handler:any){
+
         this.addListener('incomingData',handler);
     }
     onGetCapabilities(handler:any){
@@ -43,5 +44,11 @@ export default class KaiEventEmitter extends EventEmitter {
     onKaiConnected(handler:any) {
         this.addListener('kaiConnected',handler) ;
     }
+
+
+    onGetCapabilities(handler:any){
+        this.addListener('getCapabilities',handler)
+    }
+    
 
 }

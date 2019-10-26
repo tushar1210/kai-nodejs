@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/vicara-hq/kai-nodejs#readme",
   "dependencies": {
+    "bluebird": "^3.5.4",
     "ws": "^6.2.1"
   },
   "devDependencies": {

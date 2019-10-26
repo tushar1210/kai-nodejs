@@ -3,6 +3,7 @@ import KaiEventEmitter from './KaiEventEmitter';
 import * as sdk from './sdk'
 import { KaiCapabilities } from "./KaiCapabilities";
 
+
 var ws = new WebSocket('ws://localhost:2203');
 export let kaiEvents = new KaiEventEmitter();
 export let kaiCapabilities = KaiCapabilities;
@@ -38,6 +39,7 @@ ws.on('message',function(data){
                 break; 
             case 'switchHand':
                 kaiEvents.emit('switchHand',response)
+
                 break;     
             case 'kaiConnected':
                 kaiEvents.emit('kaiConnected',response) 
@@ -49,6 +51,7 @@ ws.on('message',function(data){
                 if (isAuthenticated && capabilitiesSet) {
                     kaiEvents.emit('incomingData',response)
                 }
+                break ;
             default:
                 kaiEvents.emit('default','Invalid response')
                 break;
@@ -57,6 +60,7 @@ ws.on('message',function(data){
         kaiEvents.emit(response.type,response.error)
     }
 });
+
 
 
 //TODO:-
@@ -77,11 +81,13 @@ export function getCapabilities(kaiId:number|"default"|"defaultLeft"|"defaultRig
     let request:sdk.GetCapabilitiesRequest={
         type:'getCapabilities',
         kaiId: kaiId
+
     };
     ws.on('open',function(){
         ws.send(JSON.stringify(request));
     });
 };
+
 
 export function incomingData(){
     let request={
@@ -90,6 +96,7 @@ export function incomingData(){
     ws.on('open',function(){
         ws.send(JSON.stringify(request));
     });
+
 }
 export function fingerCalibration(kaiId:number|"default"|"defaultLeft"|"defaultRight"="default"){
     let request:sdk.FingerCalibrationRequest={
@@ -100,6 +107,7 @@ export function fingerCalibration(kaiId:number|"default"|"defaultLeft"|"defaultR
         ws.send(JSON.stringify(request));
     });
 };
+
 
 export function listConnectedKais(){
     let request:sdk.ListConnectedKaisRequest={
@@ -141,6 +149,7 @@ export function imuCalibration(kaiId:number| "default" | "defaultLeft" | "defaul
     });
 }
 
+
 export function auth(moduleId:string,moduleSecret:string){
     let authToken:sdk.AuthenticationRequest={
         type:'authentication',
@@ -153,6 +162,7 @@ export function auth(moduleId:string,moduleSecret:string){
     });
 };
 
+
 export function resetCapabilities(kaiId:number|"default"|"defaultLeft"|"defaultRight"='default',capabilities:object){
     var request:object = {
         type: 'setCapabilities',
@@ -161,6 +171,7 @@ export function resetCapabilities(kaiId:number|"default"|"defaultLeft"|"defaultR
     let req = {...request,...capabilities}
     ws.send(JSON.stringify(req));
 }
+
 
 declare interface ObjectConstructor {
     assign(objects: Object[]): Object;
