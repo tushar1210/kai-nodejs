@@ -152,15 +152,28 @@ export interface GestureData {
 	gesture: 'swipeUp' | 'swipeDown' | 'swipeRight' | 'swipeLeft' | 'sideSwipeUp' | 'sideSwipeDown' | 'sideSwipeRight' | 'sideSwipeLeft' | 'pinch2Begin' | 'pinch3Begin';
 }
 
+
+export interface PYRData {
+	type: 'pyrData' ;
+	pitch: number;
+	yaw:number;
+	roll:number;
+}
+
 export interface FingerShortcutData {
 	type: 'fingerShortcutData';
 	fingers: boolean[];
 }
 
 export interface Data {
-	type: GestureData['type'] | FingerShortcutData['type'];
+
+	type: GestureData['type'] | FingerShortcutData['type'] | PYRData['type'];
 	gesture?: GestureData['gesture'];
 	fingers?: FingerShortcutData['fingers'];
+	pitch?: PYRData['pitch'];
+	yaw?: PYRData['yaw'] ;
+	roll?: PYRData['roll'];
+
 }
 
 export interface IncomingDataMessage extends Response {
